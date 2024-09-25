@@ -19,8 +19,8 @@ local config = function()
 			-- 	hidden = true,
 			-- },
 			-- live_grep = {
-			-- 	theme = "dropdown",
-			-- 	previewer = false,
+			-- 	theme = "cursor",
+			-- 	previewer = true,
 			-- },
 			-- buffers = {
 			-- 	theme = "dropdown",
@@ -35,8 +35,8 @@ return {
 	tag = "0.1.6",
 	lazy = false,
 	dependencies = { "nvim-lua/plenary.nvim" },
-    config = config,
-    keys = {
+	config = config,
+	keys = {
 		mapkey("<leader>fk", "Telescope keymaps", "n"),
 		mapkey("<leader>fh", "Telescope help_tags", "n"),
 		mapkey("<leader>ff", "Telescope find_files", "n"),

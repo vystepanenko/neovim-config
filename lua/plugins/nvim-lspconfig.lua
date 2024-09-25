@@ -18,15 +18,19 @@ local config = function()
 		on_attach = on_attach,
 		settings = { -- custom settings for lua
 			Lua = {
+				log_level = "info",
 				-- make the language server recognize "vim" global
 				diagnostics = {
 					globals = { "vim" },
+					disable = { "missing-fields" },
 				},
 				workspace = {
 					-- make language server aware of runtime files
 					library = {
-						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-						[vim.fn.stdpath("config") .. "/lua"] = true,
+						-- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+						-- [vim.fn.stdpath("config") .. "/lua"] = true,
+						vim.fn.expand("$VIMRUNTIME/lua"),
+						vim.fn.expand("$XDG_CONFIG_HOME") .. "/nvim/lua",
 					},
 				},
 			},
@@ -56,49 +60,22 @@ local config = function()
 		on_attach = on_attach,
 	})
 
-	local luacheck = require("efmls-configs.linters.luacheck")
-	local stylua = require("efmls-configs.formatters.stylua")
-	local flake8 = require("efmls-configs.linters.flake8")
-	local black = require("efmls-configs.formatters.black")
-	local php_cs_fixer = require("config.php_cs_fixer")
-
-	-- configure efm server
-	lspconfig.efm.setup({
-		filetypes = {
-			"lua",
-			"python",
-			"php",
-		},
-		init_options = {
-			documentFormatting = true,
-			documentRangeFormatting = true,
-			hover = true,
-			documentSymbol = true,
-			codeAction = true,
-			completion = true,
-		},
+	-- golang
+	lspconfig.gopls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = { "go", "gomod", "gowork", "gotmpl" },
+		cmd = { "gopls" },
+		root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
 		settings = {
-			languages = {
-				lua = { luacheck, stylua },
-				python = { flake8, black },
-				php = { php_cs_fixer },
+			gopls = {
+				analyses = {
+					unusedparams = true,
+				},
+				completeUnimported = true,
+				usePlaceholders = true,
 			},
 		},
-	})
-
-	local lsp_fmt_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
-	vim.api.nvim_create_autocmd("BufWritePost", {
-		group = lsp_fmt_group,
-		callback = function()
-			local efm = vim.lsp.get_active_clients({ name = "efm" })
-
-			if vim.tbl_isempty(efm) then
-				return
-			end
-
-			vim.lsp.buf.format({ name = "efm" })
-			-- vim.cmd("e!")
-		end,
 	})
 end
 
@@ -109,6 +86,5 @@ return {
 	dependencies = {
 		"windwp/nvim-autopairs",
 		"williamboman/mason.nvim",
-		"creativenull/efmls-configs-nvim",
 	},
 }
