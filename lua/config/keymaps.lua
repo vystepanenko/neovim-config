@@ -41,4 +41,3 @@ keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", opts)
 
 -- LSP
 mapkey("<leader>gf", "Telescope lsp_references<CR>", "n")
-
