@@ -4,7 +4,15 @@ local mapkey = require("util.keymapper").mapkey
 local config = function()
 	local telescope = require("telescope")
 	telescope.setup({
+		extensions = {
+			fzf = {
+				fuzzy = true,
+				-- 		override_generic_sorter = false,
+				-- 		override_file_sorter = false,
+			},
+		},
 		defaults = {
+			path_display = { "filename_first" },
 			mappings = {
 				i = {
 					["<C-j>"] = "move_selection_next",
@@ -13,11 +21,11 @@ local config = function()
 			},
 		},
 		pickers = {
-			-- find_files = {
-			-- 	theme = "dropdown",
-			-- 	previewer = true,
-			-- 	hidden = true,
-			-- },
+			find_files = {
+				-- 	theme = "dropdown",
+				previewer = true,
+				hidden = false,
+			},
 			-- live_grep = {
 			-- 	theme = "cursor",
 			-- 	previewer = true,
@@ -28,19 +36,27 @@ local config = function()
 			-- },
 		},
 	})
+
+	require("telescope").load_extension("fzf")
 end
 
 return {
-	"nvim-telescope/telescope.nvim",
-	tag = "0.1.6",
-	lazy = false,
-	dependencies = { "nvim-lua/plenary.nvim" },
-	config = config,
-	keys = {
-		mapkey("<leader>fk", "Telescope keymaps", "n"),
-		mapkey("<leader>fh", "Telescope help_tags", "n"),
-		mapkey("<leader>ff", "Telescope find_files", "n"),
-		mapkey("<leader>fg", "Telescope live_grep", "n"),
-		mapkey("<leader>fb", "Telescope buffers", "n"),
+	{
+		"nvim-telescope/telescope.nvim",
+		-- tag = "*",
+		lazy = false,
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = config,
+		keys = {
+			mapkey("<leader>fk", "Telescope keymaps", "n"),
+			mapkey("<leader>fh", "Telescope help_tags", "n"),
+			mapkey("<leader>ff", "Telescope find_files", "n"),
+			mapkey("<leader>fg", "Telescope live_grep", "n"),
+			mapkey("<leader>fb", "Telescope buffers", "n"),
+		},
+	},
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
 	},
 }

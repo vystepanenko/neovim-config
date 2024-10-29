@@ -39,5 +39,9 @@ mapkey("<leader>fp", "echo expand('%:p')", "n")
 keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", opts)
 
--- LSP
+-- Telescope
 mapkey("<leader>gf", "Telescope lsp_references<CR>", "n")
+mapkey("<leader>gb", "Telescope git_branches<CR>", "n")
+
+-- Lspsaga
+keymap.set("n", "<leader>tt", ":Lspsaga term_toggle<CR>", opts)

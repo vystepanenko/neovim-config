@@ -17,11 +17,22 @@ return {
 
 		dap.configurations.php = {
 			{
-				name = "listen for Xdebug docker",
+				name = "listen for Xdebug docker EDU",
 				type = "php",
 				request = "launch",
 				port = 9003,
-                hostname = "0.0.0.0",
+				hostname = "0.0.0.0",
+				-- this is where your file is in the container
+				pathMappings = {
+					["/var/www/app/"] = "${workspaceFolder}",
+				},
+			},
+			{
+				name = "listen for Xdebug docker CRM",
+				type = "php",
+				request = "launch",
+				port = 9004,
+				hostname = "0.0.0.0",
 				-- this is where your file is in the container
 				pathMappings = {
 					["/var/www/app/"] = "${workspaceFolder}",
@@ -52,6 +63,9 @@ return {
 		end)
 		vim.keymap.set("n", "<Leader>dp", function()
 			dap.step_over()
+		end)
+		vim.keymap.set("n", "<Leader>dd", function()
+			dapui.toggle()
 		end)
 	end,
 }
