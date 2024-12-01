@@ -12,7 +12,8 @@ local config = function()
 			},
 		},
 		defaults = {
-			path_display = { "filename_first" },
+			path_display = { "smart" },
+			-- path_display = { "filename_first" },
 			mappings = {
 				i = {
 					["<C-j>"] = "move_selection_next",
@@ -37,7 +38,7 @@ local config = function()
 		},
 	})
 
-	require("telescope").load_extension("fzf")
+	telescope.load_extension("fzf")
 end
 
 return {
@@ -45,7 +46,13 @@ return {
 		"nvim-telescope/telescope.nvim",
 		-- tag = "*",
 		lazy = false,
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				build = "make",
+			},
+		},
 		config = config,
 		keys = {
 			mapkey("<leader>fk", "Telescope keymaps", "n"),
@@ -54,9 +61,5 @@ return {
 			mapkey("<leader>fg", "Telescope live_grep", "n"),
 			mapkey("<leader>fb", "Telescope buffers", "n"),
 		},
-	},
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "make",
 	},
 }

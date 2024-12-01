@@ -8,7 +8,24 @@ return {
 		local dap = require("dap")
 		local dapui = require("dapui")
 
-		require("dapui").setup()
+		vim.fn.sign_define("DapBreakpoint", { text = "📌", texthl = "", linehl = "", numhl = "" })
+		vim.fn.sign_define("DapStopped", { text = "➡️", texthl = "", linehl = "", numhl = "" })
+
+		require("dapui").setup({
+			layouts = {
+				{
+					elements = {
+						"scopes",
+						-- 'breakpoints',
+						"stacks",
+						-- 'watches',
+					},
+					size = 40,
+					position = "left",
+				},
+			},
+		})
+
 		dap.adapters.php = {
 			type = "executable",
 			command = "node",
@@ -32,6 +49,17 @@ return {
 				type = "php",
 				request = "launch",
 				port = 9004,
+				hostname = "0.0.0.0",
+				-- this is where your file is in the container
+				pathMappings = {
+					["/var/www/app/"] = "${workspaceFolder}",
+				},
+			},
+			{
+				name = "listen for Xdebug docker FM",
+				type = "php",
+				request = "launch",
+				port = 9005,
 				hostname = "0.0.0.0",
 				-- this is where your file is in the container
 				pathMappings = {

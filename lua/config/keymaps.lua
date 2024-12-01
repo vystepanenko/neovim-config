@@ -4,7 +4,7 @@ local opts = { noremap = true, silent = true }
 local mapkey = require("util.keymapper").mapkey
 
 -- Dir nav
-keymap.set("n", "<leader>ee", ":NvimTreeFocus<CR>", opts)
+keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>", opts)
 keymap.set("n", "<leader>ec", ":NvimTreeClose<CR>", opts)
 
 -- Pane nav
@@ -22,6 +22,8 @@ keymap.set("n", "<C-Right>", ":TmuxNavigateRight<CR>", opts) -- Nav right
 -- Windows managment
 keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Nav vertically
 keymap.set("n", "<leader>sh", ":split<CR>", opts) -- Nav horizontally
+keymap.set("n", "<leader>se", "<C-w>=", opts) -- Nav equalizer
+keymap.set("n", "<leader>sx", "<cmd>close<CR>", opts) -- Nav close
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle minimize
 
 -- Commnet

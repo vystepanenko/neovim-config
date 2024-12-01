@@ -4,6 +4,14 @@ return {
 	config = function()
 		vim.cmd([[hi NvimTreeNormal guibg=NONE ctermbg=None]])
 		require("nvim-tree").setup({
+			view = {
+				relativenumber = true,
+			},
+			renderer = {
+				indent_markers = {
+					enable = true,
+				},
+			},
 			filters = {
 				dotfiles = false,
 			},
