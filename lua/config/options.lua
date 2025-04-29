@@ -23,6 +23,7 @@ opt.signcolumn = "yes"
 opt.cmdheight = 1
 opt.scrolloff = 10
 opt.completeopt = "menuone,noinsert,noselect"
+opt.showmode = false
 
 -- Behaviour
 opt.hidden = true
@@ -37,6 +38,11 @@ opt.splitbelow = true
 opt.autochdir = false
 opt.iskeyword:append("-")
 opt.mouse:append("a")
-opt.clipboard:append("unnamedplus")
+vim.schedule(function()
+    opt.clipboard:append("unnamedplus")
+end)
 opt.modifiable = true
 opt.encoding = "UTF-8"
+
+-- for obsidian
+vim.opt.conceallevel = 1

@@ -1,11 +1,13 @@
-vim.g.nord_italic = false
-vim.g.nord_disable_background = false
 return {
-	-- "arcticicestudio/nord-vim",
-	"shaunsingh/nord.nvim",
-	lazy = false,
-	priority = 999,
-	config = function()
-		vim.cmd("colorscheme nord")
-	end,
+    "gbprod/nord.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+        require("nord").setup({
+            transparent = true,
+        })
+        vim.g.nord_italic = false
+        vim.g.nord_disable_background = false
+        vim.cmd.colorscheme("nord")
+    end,
 }

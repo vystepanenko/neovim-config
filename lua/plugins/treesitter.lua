@@ -1,40 +1,45 @@
-local config = function()
-	require("nvim-treesitter.configs").setup({
-		indent = {
-			enable = true,
-		},
-		autotag = {
-			enable = true,
-		},
-		ensure_installed = {
-			"markdown",
-			"json",
-			"javascript",
-			"typescript",
-			"yaml",
-			"html",
-			"css",
-			"markdown",
-			"bash",
-			"lua",
-			"dockerfile",
-			"gitignore",
-            "gitcommit",
-			"python",
-			"vue",
-            "php",
-            "go",
-		},
-		auto_install = true,
-		highlight = {
-			enable = true,
-			additional_vim_regex_highlighting = true,
-		},
-	})
-end
-
 return {
-	"nvim-treesitter/nvim-treesitter",
-  lazy = false,
-  config = config
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+        local configs = require("nvim-treesitter.configs")
+
+        configs.setup({
+            ensure_installed = {
+                "markdown",
+                "json",
+                "javascript",
+                "typescript",
+                "yaml",
+                "html",
+                "css",
+                "markdown",
+                "bash",
+                "lua",
+                "dockerfile",
+                "gitignore",
+                "gitcommit",
+                "python",
+                "vue",
+                "php",
+                "go",
+            },
+            sync_install = false,
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = true,
+            },
+            indent = { enable = true },
+
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<Enter>", -- set to `false` to disable one of the mappings
+                    node_incremental = "<Enter>",
+                    scope_incremental = false,
+                    node_decremental = "<Backspace>",
+                },
+            },
+        })
+    end,
 }

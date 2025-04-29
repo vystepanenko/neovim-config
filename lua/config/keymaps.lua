@@ -1,17 +1,13 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
-local mapkey = require("util.keymapper").mapkey
-
--- Dir nav
+-- nvim-tree
 keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>", opts)
 keymap.set("n", "<leader>ec", ":NvimTreeClose<CR>", opts)
 
--- Pane nav
--- keymap.set("n", "<C-Left>", "wincmd h", opts) -- Nav left
--- keymap.set("n", "<C-Down>", "wincmd j", opts) -- Nav down
--- keymap.set("n", "<C-Up>", "wincmd k", opts) -- Nav up
--- keymap.set("n", "<C-Right>", "wincmd l", opts) -- Nav right
+-- Commet
+vim.api.nvim_set_keymap("n", "<C-_>", "gcc", { noremap = false })
+vim.api.nvim_set_keymap("v", "<C-_>", "gcc", { noremap = false })
 
 -- nvim tmux navigation
 keymap.set("n", "<C-Left>", ":TmuxNavigateLeft<CR>", opts) -- Nav left
@@ -26,24 +22,28 @@ keymap.set("n", "<leader>se", "<C-w>=", opts) -- Nav equalizer
 keymap.set("n", "<leader>sx", "<cmd>close<CR>", opts) -- Nav close
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle minimize
 
--- Commnet
-vim.api.nvim_set_keymap("n", "<C-_>", "gcc", { noremap = false })
-vim.api.nvim_set_keymap("v", "<C-_>", "gcc", { noremap = false })
-
 -- Identing
 keymap.set("v", "<", "<gv")
 keymap.set("v", ">", ">gv")
 
--- Show Full File-Path
-mapkey("<leader>fp", "echo expand('%:p')", "n")
+-- Telescope
+local builtin = require("telescope.builtin")
+keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
+keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
+keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
+keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
+keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Telescope keymaps" })
+keymap.set("n", "<leader>gb", ":Telescope git_branches<CR>", { desc = "Telescope [G]it [B]ranches" })
+keymap.set("n", "<leader>grf", ":Telescope lsp_references<CR>", { desc = "Telescope LSP References" })
+
+keymap.set("n", "<leader>nh", function()
+    Snacks.notifier.show_history()
+end, { desc = "Snacks [N]otification [H]istory" })
+
+keymap.set("n", "<leader>od", function()
+    vim.diagnostic.open_float()
+end, { desc = "Open diagnostic" })
 
 -- Gitsigns
 keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", opts)
-
--- Telescope
-mapkey("<leader>gf", "Telescope lsp_references<CR>", "n")
-mapkey("<leader>gb", "Telescope git_branches<CR>", "n")
-
--- Lspsaga
-keymap.set("n", "<leader>tt", ":Lspsaga term_toggle<CR>", opts)
