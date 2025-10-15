@@ -22,6 +22,9 @@ local config = function()
             -- }
             -- Now the picker_config_key will be applied every time you call this
             -- builtin picker
+            lsp_references = {
+                show_line = false,
+            },
         },
         extensions = {
             -- Your extension configuration goes here:

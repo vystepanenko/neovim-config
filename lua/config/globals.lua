@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- debug mode
+-- vim.lsp.set_log_level("debug")
+
 -- yankink higlights
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking(copying) text",
@@ -9,6 +12,17 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank()
     end,
 })
+
+-- search higlight
+vim.on_key(function(char)
+    if vim.fn.mode() == "n" then
+        local k = vim.fn.keytrans(char)
+        local active = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, k)
+        if vim.opt.hlsearch:get() ~= active then
+            vim.opt.hlsearch = active
+        end
+    end
+end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
 -- clipboard
 vim.g.clipboard = {

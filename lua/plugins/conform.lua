@@ -23,6 +23,8 @@ return {
             php = { "php_cs_fixer" },
             python = { "isort", "black" },
             javascript = { "prettierd", "prettier", stop_after_first = true },
+            html = { "prettierd", "prettier", stop_after_first = true },
+            htm = { "prettier" },
             go = { "gofumpt", "goimports-reviser", "golines" },
         },
         -- Set default options
@@ -30,7 +32,7 @@ return {
             lsp_format = "fallback",
         },
         -- Set up format-on-save
-        format_on_save = { timeout_ms = 500 },
+        format_on_save = { timeout_ms = 1000 },
         -- Customize formatters
         formatters = {
             shfmt = {

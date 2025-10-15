@@ -12,7 +12,7 @@ opt.wrap = false
 opt.incsearch = true
 opt.ignorecase = true
 opt.smartcase = true
-opt.hlsearch = false
+opt.hlsearch = true
 
 -- Appearance
 opt.number = true
@@ -46,3 +46,20 @@ opt.encoding = "UTF-8"
 
 -- for obsidian
 vim.opt.conceallevel = 1
+
+-- spelling
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true
+vim.opt.spelloptions = "camel"
+
+local colors = {
+    bad = "#DC2626",
+    rare = "#F59E0B",
+    regional = "#3B82F6",
+    cap = "#6D28D9",
+}
+
+vim.api.nvim_set_hl(0, "SpellBad", { undercurl = true, sp = colors.bad })
+vim.api.nvim_set_hl(0, "SpellRare", { undercurl = true, sp = colors.rare })
+vim.api.nvim_set_hl(0, "SpellLocal", { undercurl = true, sp = colors.regional })
+vim.api.nvim_set_hl(0, "SpellCap", { undercurl = true, sp = colors.cap })

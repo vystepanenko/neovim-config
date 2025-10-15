@@ -1,0 +1,69 @@
+{
+  "Public Method": {
+    "prefix": "met",
+    "body": ["public function $1($2)", "{", "\t$3", "}"],
+    "description": "create public method"
+  },
+  "Protected Method": {
+    "prefix": "ptmet",
+    "body": ["protected function $1($2)", "{\r", "    $3\r", "}"],
+    "description": "Create Protected Method"
+  },
+  "Private Method": {
+    "prefix": "pmet",
+    "body": ["private function $1($2)", "{\r", "    $3\r", "}"],
+    "description": "Create Private Method"
+  },
+  "Public static Method": {
+    "prefix": "psmet",
+    "body": ["public static function $1($2)", "{\r", "    $3\r", "}"],
+    "description": "Create static Method"
+  },
+  "__construct Method": {
+    "prefix": "cmet",
+    "body": ["public function __construct($1)", "{", "\t$2", "}"],
+    "description": "create public method"
+  },
+  "die&var_dump": {
+    "prefix": "ddd",
+    "body": ["die(var_dump($1));"],
+    "description": "Die and var_dump var"
+  },
+  "var_dump": {
+    "prefix": "vd",
+    "body": ["var_dump($1);"],
+    "description": "create var_dump"
+  },
+  "getAtrribute": {
+    "prefix": "gettr",
+    "body": [
+      "/**",
+      "* Getter for '$2'",
+      "*",
+      "* @return void",
+      "*/",
+      "public function get$1Attribute()",
+      "{",
+      "    return \\$this->attributes['$2']=\\$this->$2;",
+      "}"
+    ],
+    "description": "create laravel get atribute func"
+  },
+  "setterAttribute": {
+    "prefix": "settr",
+    "body": [
+      "/**",
+      " * set attribute '$2'",
+      " *",
+      " * @param $3 \\$value",
+      " * @return void",
+      " */",
+      "public function set$1Attribute(\\$value)",
+      "{",
+      "    \\$this->$2 = \\$value;",
+      "    \\$this->append('$2');",
+      "}"
+    ],
+    "description": "Setter for models attribute"
+  }
+}
