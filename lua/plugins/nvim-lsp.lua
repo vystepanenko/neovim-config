@@ -165,12 +165,14 @@ return {
 
         local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-        local lspconfig = require("lspconfig")
-
-        lspconfig.intelephense.setup({
+        -- Apply capabilities to every LSP server by default.
+        vim.lsp.config("*", {
             capabilities = capabilities,
-            -- root_dir = lspconfig.util.root_pattern("composer.json", ".git"),
-            root_dir = lspconfig.util.root_pattern(".git"),
+        })
+
+        vim.lsp.config("intelephense", {
+            -- root_markers = { "composer.json", ".git" },
+            root_markers = { ".git" },
             init_options = {
                 -- storagePath = vim.fn.stdpath("cache") .. "/intelephense",
                 storagePath = "/tmp/intelephense",
@@ -250,8 +252,7 @@ return {
         })
 
         --  Lua
-        lspconfig.lua_ls.setup({
-            capabilities = capabilities,
+        vim.lsp.config("lua_ls", {
             settings = {
                 Lua = {
                     completion = { callSnippet = "Replace" },
@@ -259,30 +260,22 @@ return {
             },
         })
 
-        --  Bash
-        lspconfig.bashls.setup({
-            capabilities = capabilities,
-        })
-
-        --  Go
-        lspconfig.gopls.setup({
-            capabilities = capabilities,
-        })
-
-        --  Python
-        lspconfig.pyright.setup({
-            capabilities = capabilities,
-        })
-
-        lspconfig.yamlls.setup({
-            capabilities = capabilities,
-        })
-
-        lspconfig.dockerls.setup({
-            capabilities = capabilities,
+        --  Docker
+        vim.lsp.config("dockerls", {
             cmd = { "docker-compose-langserver", "--stdio" },
             filetypes = { "yaml.docker-compose" },
             root_markers = { "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml" },
+        })
+
+        -- bashls, gopls, pyright, yamlls use stock config + the global capabilities above.
+        vim.lsp.enable({
+            "intelephense",
+            "lua_ls",
+            "bashls",
+            "gopls",
+            "pyright",
+            "yamlls",
+            "dockerls",
         })
     end,
 }
