@@ -160,6 +160,7 @@ return {
                 "pyright",
                 "stylua",
                 "php-cs-fixer",
+                "shellcheck",
             },
         })
 
@@ -267,7 +268,53 @@ return {
             root_markers = { "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml" },
         })
 
-        -- bashls, gopls, pyright, yamlls use stock config + the global capabilities above.
+        --  Go
+        vim.lsp.config("gopls", {
+            settings = {
+                gopls = {
+                    gofumpt = true, -- stricter formatting
+                    staticcheck = true, -- extra staticcheck analyses
+                    usePlaceholders = true, -- argument placeholders on completion
+                    analyses = {
+                        unusedparams = true,
+                        unusedwrite = true,
+                        nilness = true,
+                        shadow = true,
+                        useany = true,
+                    },
+                    hints = { -- inlay hints (toggle with <leader>th)
+                        assignVariableTypes = true,
+                        compositeLiteralFields = true,
+                        constantValues = true,
+                        functionTypeParameters = true,
+                        parameterNames = true,
+                        rangeVariableTypes = true,
+                    },
+                },
+            },
+        })
+
+        --  Bash
+        vim.lsp.config("bashls", {
+            settings = {
+                bashIde = {
+                    shellcheckPath = "shellcheck", -- diagnostics via shellcheck
+                },
+            },
+        })
+
+        --  YAML
+        vim.lsp.config("yamlls", {
+            settings = {
+                yaml = {
+                    keyOrdering = false, -- don't complain about key order
+                    format = { enable = true },
+                    schemaStore = { enable = true }, -- auto schemas (k8s, gh-actions, compose, ...)
+                },
+            },
+        })
+
+        -- pyright uses stock config + the global capabilities above.
         vim.lsp.enable({
             "intelephense",
             "lua_ls",
