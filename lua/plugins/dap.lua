@@ -66,6 +66,28 @@ return {
                     ["/var/www/app/"] = "${workspaceFolder}",
                 },
             },
+            {
+                name = "listen for Xdebug docker Webiair",
+                type = "php",
+                request = "launch",
+                port = 9006,
+                hostname = "0.0.0.0",
+                -- this is where your file is in the container
+                pathMappings = {
+                    ["/var/www/app/"] = "${workspaceFolder}",
+                },
+            },
+            {
+                name = "listen for Xdebug docker Mail service",
+                type = "php",
+                request = "launch",
+                port = 9007,
+                hostname = "0.0.0.0",
+                -- this is where your file is in the container
+                pathMappings = {
+                    ["/var/www/app/"] = "${workspaceFolder}",
+                },
+            },
         }
 
         dap.listeners.before.attach.dapui_config = function()

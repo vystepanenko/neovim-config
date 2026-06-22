@@ -1,8 +1,7 @@
 return {
-    -- "epwalsh/obsidian.nvim",
     "obsidian-nvim/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
-    lazy = true,
+    lazy = false,
     ft = "markdown",
     -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
     -- event = {
@@ -27,14 +26,21 @@ return {
             },
         },
         completion = {
-            -- Enables completion using nvim_cmp
-            nvim_cmp = false,
-            -- Enables completion using blink.cmp
-            blink = true,
             -- Trigger completion at 2 chars.
             min_chars = 2,
         },
         ui = { enable = false },
+        templates = {
+            folder = "Templates",
+            date_format = "%Y-%m-%d",
+            time_format = "%H:%M",
+            substitutions = {},
+        },
+        daily_notes = {
+            folder = "04_Journal",
+            date_format = "%Y-%m-%d",
+            template = "daily_template.md",
+        },
 
         -- see below for full list of options 👇
     },

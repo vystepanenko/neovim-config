@@ -58,3 +58,28 @@ keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", opts)
 -- move lines in visual mode
 keymap.set("v", "<C-Down>", ":m '>+1<CR>gv=gv", { desc = "Moves lines down in visual selection" })
 keymap.set("v", "<C-Up>", ":m '<-2<CR>gv=gv", { desc = "Moves lines up in visual selection" })
+
+-- Esc via jj
+vim.keymap.set("i", "jj", "<Esc>", { desc = "Exit insert mode with jj" })
+
+-- Obsidian.nvim Keybindings
+-- Daily Management
+keymap.set("n", "<leader>on", "<cmd>ObsidianToday<cr>", { desc = "Open Today's Note" })
+keymap.set("n", "<leader>oy", "<cmd>ObsidianYesterday<cr>", { desc = "Open Yesterday's Note" })
+keymap.set("n", "<leader>ot", "<cmd>ObsidianTomorrow<cr>", { desc = "Open Tomorrow's Note" })
+
+-- Navigation & Search
+keymap.set("n", "<leader>oo", "<cmd>ObsidianQuickSwitch<cr>", { desc = "Quick Switch Note" })
+keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<cr>", { desc = "Search Notes (grep)" })
+keymap.set("n", "<leader>ob", "<cmd>ObsidianBacklinks<cr>", { desc = "Show Backlinks" })
+keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<cr>", { desc = "List All Links" })
+
+-- Editing & Organization
+keymap.set("n", "<leader>oc", "<cmd>ObsidianCheck<cr>", { desc = "Check Vault Integrity" })
+keymap.set("n", "<leader>onw", "<cmd>ObsidianNew<cr>", { desc = "Create New Note" })
+keymap.set("n", "<leader>oti", "<cmd>ObsidianTemplate<cr>", { desc = "Insert Template" })
+keymap.set("n", "<leader>orn", "<cmd>ObsidianRename<cr>", { desc = "Rename Note & Update Links" })
+
+-- Visual Mode (Link Creation)
+keymap.set("v", "<leader>onl", ":ObsidianLinkNewV<cr>", { desc = "Create Note from Selection" })
+keymap.set("v", "<leader>olk", ":ObsidianLink<cr>", { desc = "Link Selection to Existing Note" })
