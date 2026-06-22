@@ -19,6 +19,7 @@ return {
         -- see below for full list of optional dependencies 👇
     },
     opts = {
+        legacy_commands = false,
         workspaces = {
             {
                 name = "personal",
