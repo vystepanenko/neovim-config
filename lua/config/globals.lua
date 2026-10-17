@@ -24,16 +24,16 @@ vim.on_key(function(char)
     end
 end, vim.api.nvim_create_namespace("auto_hlsearch"))
 
--- clipboard
+-- clipboard (win32yank handles UTF-8, clip.exe breaks Cyrillic)
 vim.g.clipboard = {
-    name = "WslClipboard",
+    name = "win32yank",
     copy = {
-        ["+"] = "clip.exe",
-        ["*"] = "clip.exe",
+        ["+"] = "win32yank.exe -i --crlf",
+        ["*"] = "win32yank.exe -i --crlf",
     },
     paste = {
-        ["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        ["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        ["+"] = "win32yank.exe -o --lf",
+        ["*"] = "win32yank.exe -o --lf",
     },
     cache_enabled = 0,
 }
