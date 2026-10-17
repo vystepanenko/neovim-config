@@ -156,6 +156,7 @@ return {
                 "docker-compose-language-service",
                 "ruff",
                 "jq", -- pretty JSON responses in hurl.nvim
+                "tree-sitter-cli", -- nvim-treesitter main builds parsers with it
             },
         })
 
