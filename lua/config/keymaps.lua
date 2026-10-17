@@ -14,6 +14,11 @@ keymap.set("n", "<C-Left>", ":TmuxNavigateLeft<CR>", opts) -- Nav left
 keymap.set("n", "<C-Down>", ":TmuxNavigateDown<CR>", opts) -- Nav down
 keymap.set("n", "<C-Up>", ":TmuxNavigateUp<CR>", opts) -- Nav up
 keymap.set("n", "<C-Right>", ":TmuxNavigateRight<CR>", opts) -- Nav right
+-- same from terminal mode (e.g. Claude Code), no need to leave to normal first
+keymap.set("t", "<C-Left>", "<C-\\><C-n><cmd>TmuxNavigateLeft<CR>", opts)
+keymap.set("t", "<C-Down>", "<C-\\><C-n><cmd>TmuxNavigateDown<CR>", opts)
+keymap.set("t", "<C-Up>", "<C-\\><C-n><cmd>TmuxNavigateUp<CR>", opts)
+keymap.set("t", "<C-Right>", "<C-\\><C-n><cmd>TmuxNavigateRight<CR>", opts)
 
 -- Windows managment
 keymap.set("n", "<leader>sv", ":vsplit<CR>", opts) -- Nav vertically

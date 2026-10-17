@@ -31,20 +31,9 @@ return {
             return true
         end
     end,
-    opts = {
-        terminal = {
-            snacks_win_opts = {
-                keys = {
-                    term_normal = {
-                        "<esc>",
-                        "<C-\\><C-n>",
-                        mode = "t",
-                        desc = "Normal mode",
-                    },
-                },
-            },
-        },
-    },
+    -- Terminal <esc> uses the snacks default: single passes to Claude,
+    -- double (within 200ms) switches to normal mode.
+    opts = {},
     keys = {
         { "<leader>a", nil, desc = "AI/Claude Code" },
         { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
