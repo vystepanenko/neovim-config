@@ -161,6 +161,9 @@ return {
                 "stylua",
                 "php-cs-fixer",
                 "shellcheck",
+                "yaml-language-server",
+                "dockerfile-language-server",
+                "docker-compose-language-service",
             },
         })
 
@@ -261,13 +264,6 @@ return {
             },
         })
 
-        --  Docker
-        vim.lsp.config("dockerls", {
-            cmd = { "docker-compose-langserver", "--stdio" },
-            filetypes = { "yaml.docker-compose" },
-            root_markers = { "docker-compose.yaml", "docker-compose.yml", "compose.yaml", "compose.yml" },
-        })
-
         --  Go
         vim.lsp.config("gopls", {
             settings = {
@@ -296,6 +292,14 @@ return {
 
         --  Bash
         vim.lsp.config("bashls", {
+            -- Skip dotenv files (.env, .env.*, *.env): ft=sh, but shellcheck spams SC2034
+            root_dir = function(bufnr, on_dir)
+                local name = vim.fs.basename(vim.api.nvim_buf_get_name(bufnr))
+                if name:match("^%.env") or name:match("%.env$") then
+                    return
+                end
+                on_dir(vim.fs.root(bufnr, { ".git" }))
+            end,
             settings = {
                 bashIde = {
                     shellcheckPath = "shellcheck", -- diagnostics via shellcheck
@@ -323,6 +327,7 @@ return {
             "pyright",
             "yamlls",
             "dockerls",
+            "docker_compose_language_service",
         })
     end,
 }

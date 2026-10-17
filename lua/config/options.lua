@@ -48,6 +48,14 @@ opt.encoding = "UTF-8"
 vim.opt.conceallevel = 1
 
 -- spelling
+-- Docker Compose files get their own filetype so the compose LSP attaches
+vim.filetype.add({
+    pattern = {
+        ["docker%-compose[%w%.%-_]*%.ya?ml"] = "yaml.docker-compose",
+        ["compose[%w%.%-_]*%.ya?ml"] = "yaml.docker-compose",
+    },
+})
+
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
 vim.opt.spelloptions = "camel"

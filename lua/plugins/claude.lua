@@ -2,6 +2,12 @@ return {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
     init = function()
+        -- Claude Code's fullscreen renderer uses the alternate screen buffer,
+        -- which breaks scrollback inside nvim :term buffers (can't scroll past
+        -- the visible region). Force the classic renderer for claude launched
+        -- from nvim; plain-tmux sessions outside nvim are unaffected.
+        vim.env.CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN = "1"
+
         -- Coalesce streamed bracketed paste phases inside :term buffers so
         -- Claude Code sees one paste event instead of fragments.
         -- https://github.com/coder/claudecode.nvim/issues/161
