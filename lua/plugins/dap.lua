@@ -120,5 +120,8 @@ return {
         vim.keymap.set("n", "<Leader>dd", function()
             dapui.toggle()
         end)
+        vim.keymap.set("n", "<Leader>db", function()
+            require("fzf-lua").dap_breakpoints()
+        end)
     end,
 }

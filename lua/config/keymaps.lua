@@ -31,14 +31,7 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) -- Toggle minimize
 keymap.set("v", "<", "<gv")
 keymap.set("v", ">", ">gv")
 
--- Telescope
--- local builtin = require("telescope.builtin")
--- keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
--- keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
--- keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
--- keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
--- keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Telescope keymaps" })
--- keymap.set("n", "<leader>gb", ":Telescope git_branches<CR>", { desc = "Telescope [G]it [B]ranches" })
+-- Fzf
 local builtin = require("fzf-lua")
 keymap.set("n", "<leader>ff", builtin.files, { desc = "Fzf find files" })
 keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Fzf live grep" })
