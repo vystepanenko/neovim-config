@@ -56,6 +56,11 @@ keymap.set("n", "<leader>od", function()
     vim.diagnostic.open_float()
 end, { desc = "Open diagnostic" })
 
+keymap.set("n", "<leader>tw", function()
+    vim.wo.wrap = not vim.wo.wrap
+    vim.notify("wrap " .. (vim.wo.wrap and "on" or "off"))
+end, { desc = "[T]oggle [W]rap" })
+
 -- Gitsigns
 keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", opts)
 keymap.set("n", "<leader>gt", ":Gitsigns toggle_current_line_blame<CR>", opts)
