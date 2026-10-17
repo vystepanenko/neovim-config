@@ -23,6 +23,7 @@ return {
                 "vue",
                 "php",
                 "go",
+                "hurl",
             },
             sync_install = false,
             highlight = {

@@ -155,6 +155,7 @@ return {
                 "dockerfile-language-server",
                 "docker-compose-language-service",
                 "ruff",
+                "jq", -- pretty JSON responses in hurl.nvim
             },
         })
 

@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# Run phpunit inside the project's php-fpm container for neotest-phpunit.
+#
+# Container and in-container path come from the project's .env:
+#   <DOCKER_APP_ENV|APP_ENV>.<DOCKER_APP_NAME|APP_NAME>.php-fpm
+#   DOCKER_APP_BASE_PATH | APP_BASE_PATH
+# Host paths in args are rewritten to container paths. The junit report
+# is written inside vendor/ (mounted, git-ignored) and copied back to the
+# host path neotest asked for.
+set -u
+
+# Project root: closest dir with .env, starting from the first path arg or cwd
+start="$PWD"
+for arg in "$@"; do
+    [[ "$arg" == /* && -e "$arg" ]] && { start="$arg"; break; }
+done
+[[ -f "$start" ]] && start="$(dirname "$start")"
+root="$start"
+while [[ "$root" != "/" && ! -f "$root/.env" ]]; do root="$(dirname "$root")"; done
+if [[ ! -f "$root/.env" ]]; then
+    echo "phpunit-docker: no .env found above $start" >&2
+    exit 1
+fi
+
+env_get() { grep -E "^$1=" "$root/.env" | tail -1 | cut -d= -f2- | tr -d '"'"'"; }
+app_env="$(env_get DOCKER_APP_ENV)";        app_env="${app_env:-$(env_get APP_ENV)}"
+app_name="$(env_get DOCKER_APP_NAME)";      app_name="${app_name:-$(env_get APP_NAME)}"
+base="$(env_get DOCKER_APP_BASE_PATH)";     base="${base:-$(env_get APP_BASE_PATH)}"
+container="${app_env}.${app_name}.php-fpm"
+
+# phpunit config: root or one level down (e.g. crm keeps it in laravel/)
+config_args=()
+if ! ls "$root"/phpunit.xml* >/dev/null 2>&1; then
+    cfg="$(ls "$root"/*/phpunit.xml 2>/dev/null | head -1)"
+    [[ -n "$cfg" ]] && config_args=(-c "${cfg#"$root"/}")
+fi
+
+host_junit=""
+container_junit="$base/vendor/.neotest-junit.xml"
+args=()
+for arg in "$@"; do
+    case "$arg" in
+        --log-junit=*)
+            host_junit="${arg#--log-junit=}"
+            args+=("--log-junit=$container_junit")
+            ;;
+        *) args+=("${arg//"$root"/$base}") ;;
+    esac
+done
+
+docker exec -i --user=www-data -e XDEBUG_MODE=off "$container" \
+    php vendor/bin/phpunit "${config_args[@]}" "${args[@]}"
+status=$?
+
+if [[ -n "$host_junit" && -f "$root/vendor/.neotest-junit.xml" ]]; then
+    # neotest parses host paths from the report
+    sed "s#$base/#$root/#g" "$root/vendor/.neotest-junit.xml" >"$host_junit"
+    rm -f "$root/vendor/.neotest-junit.xml"
+fi
+exit $status
