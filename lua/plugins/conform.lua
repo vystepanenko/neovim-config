@@ -21,7 +21,7 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             php = { "php_cs_fixer" },
-            python = { "isort", "black" },
+            python = { "ruff_organize_imports", "ruff_format" }, -- isort + black equivalent
             javascript = { "prettierd", "prettier", stop_after_first = true },
             html = { "prettierd", "prettier", stop_after_first = true },
             htm = { "prettier" },

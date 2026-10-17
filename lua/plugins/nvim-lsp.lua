@@ -154,6 +154,7 @@ return {
                 "yaml-language-server",
                 "dockerfile-language-server",
                 "docker-compose-language-service",
+                "ruff",
             },
         })
 
@@ -308,13 +309,25 @@ return {
             },
         })
 
-        -- pyright uses stock config + the global capabilities above.
+        --  Python: pyright for types/hover, ruff for lint + fixes
+        vim.lsp.config("pyright", {
+            settings = {
+                pyright = { disableOrganizeImports = true }, -- ruff handles imports
+            },
+        })
+        vim.lsp.config("ruff", {
+            on_attach = function(client)
+                client.server_capabilities.hoverProvider = false -- leave hover to pyright
+            end,
+        })
+
         vim.lsp.enable({
             "intelephense",
             "lua_ls",
             "bashls",
             "gopls",
             "pyright",
+            "ruff",
             "yamlls",
             "dockerls",
             "docker_compose_language_service",
