@@ -169,19 +169,13 @@ return {
             -- root_markers = { "composer.json", ".git" },
             root_markers = { ".git" },
             init_options = {
-                -- storagePath = vim.fn.stdpath("cache") .. "/intelephense",
-                storagePath = "/tmp/intelephense",
+                -- /tmp is wiped on every WSL boot, which forces a full reindex
+                storagePath = vim.fn.stdpath("cache") .. "/intelephense",
             },
             settings = {
                 intelephense = {
                     files = {
                         maxSize = 10000000,
-                    },
-                    environment = {
-                        includePaths = {
-                            "./_ide_helper.php",
-                            "./vendor/laravel/framework/src",
-                        },
                     },
                     stubs = {
                         "apache",
@@ -189,6 +183,7 @@ return {
                         "bz2",
                         "calendar",
                         "Core",
+                        "ctype",
                         "curl",
                         "date",
                         "dom",
@@ -203,6 +198,7 @@ return {
                         "hash",
                         "iconv",
                         "imap",
+                        "intl",
                         "json",
                         "libxml",
                         "mbstring",
@@ -211,14 +207,16 @@ return {
                         "mysqli",
                         "oci8",
                         "openssl",
-                        "password",
                         "pcntl",
                         "pcre",
                         "PDO",
-                        "pdo_mysql",
+                        "pgsql",
                         "Phar",
+                        "posix",
+                        "random",
                         "readline",
                         "recode",
+                        "redis",
                         "Reflection",
                         "session",
                         "SimpleXML",
@@ -226,6 +224,7 @@ return {
                         "sockets",
                         "sodium",
                         "SPL",
+                        "sqlite3",
                         "standard",
                         "superglobals",
                         "sysvmsg",
