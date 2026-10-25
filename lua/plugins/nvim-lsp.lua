@@ -157,6 +157,8 @@ return {
                 "ruff",
                 "jq", -- pretty JSON responses in hurl.nvim
                 "tree-sitter-cli", -- nvim-treesitter main builds parsers with it
+                "autotools-language-server", -- Makefile LSP
+                "mbake", -- Makefile formatter
             },
         })
 
@@ -332,6 +334,7 @@ return {
             "yamlls",
             "dockerls",
             "docker_compose_language_service",
+            "autotools_ls",
         })
     end,
 }

@@ -18,6 +18,7 @@ local parsers = {
     "php",
     "go",
     "hurl",
+    "make",
 }
 
 -- Incremental selection (removed from `main`): <Enter> starts / grows to

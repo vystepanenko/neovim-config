@@ -26,6 +26,7 @@ return {
             html = { "prettierd", "prettier", stop_after_first = true },
             htm = { "prettier" },
             go = { "gofumpt", "goimports-reviser", "golines" },
+            make = { "bake" },
         },
         -- Set default options
         default_format_opts = {
