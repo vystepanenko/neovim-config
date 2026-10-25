@@ -159,6 +159,7 @@ return {
                 "tree-sitter-cli", -- nvim-treesitter main builds parsers with it
                 "autotools-language-server", -- Makefile LSP
                 "mbake", -- Makefile formatter
+                "laravel_lsp", -- Laravel-aware completion/hover next to intelephense
             },
         })
 
@@ -335,6 +336,7 @@ return {
             "dockerls",
             "docker_compose_language_service",
             "autotools_ls",
+            "laravel_lsp",
         })
     end,
 }
