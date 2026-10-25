@@ -160,6 +160,8 @@ return {
                 "autotools-language-server", -- Makefile LSP
                 "mbake", -- Makefile formatter
                 "laravel_lsp", -- Laravel-aware completion/hover next to intelephense
+                "terraform-ls",
+                "tflint",
             },
         })
 
@@ -337,6 +339,8 @@ return {
             "docker_compose_language_service",
             "autotools_ls",
             "laravel_lsp",
+            "terraformls",
+            "tflint",
         })
     end,
 }

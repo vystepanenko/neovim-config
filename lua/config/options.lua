@@ -48,8 +48,12 @@ opt.encoding = "UTF-8"
 vim.opt.conceallevel = 1
 
 -- spelling
--- Docker Compose files get their own filetype so the compose LSP attaches
+-- Docker Compose files get their own filetype so the compose LSP attaches;
+-- *.tf defaults to TinyFugue ("tf"), terraform-ls needs "terraform"
 vim.filetype.add({
+    extension = {
+        tf = "terraform",
+    },
     pattern = {
         ["docker%-compose[%w%.%-_]*%.ya?ml"] = "yaml.docker-compose",
         ["compose[%w%.%-_]*%.ya?ml"] = "yaml.docker-compose",

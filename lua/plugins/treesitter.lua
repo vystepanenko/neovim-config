@@ -19,6 +19,7 @@ local parsers = {
     "go",
     "hurl",
     "make",
+    "terraform",
 }
 
 -- Incremental selection (removed from `main`): <Enter> starts / grows to
