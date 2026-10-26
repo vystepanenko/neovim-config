@@ -252,6 +252,15 @@ return {
             },
         })
 
+        --  Laravel
+        vim.lsp.config("laravel_lsp", {
+            init_options = {
+                -- "auto" picks Sail whenever vendor/bin/sail exists (laravel/sail is
+                -- in require-dev by default), so force host PHP on the mounted code
+                phpEnvironment = "local",
+            },
+        })
+
         --  Lua
         vim.lsp.config("lua_ls", {
             settings = {

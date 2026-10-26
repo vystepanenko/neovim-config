@@ -5,6 +5,15 @@ local opts = { noremap = true, silent = true }
 keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>", opts)
 keymap.set("n", "<leader>ec", ":NvimTreeClose<CR>", opts)
 
+-- LSP: nvim-lspconfig drops :LspInfo/:LspLog when the built-in :lsp exists
+vim.api.nvim_create_user_command("LspInfo", "checkhealth vim.lsp", { desc = "Alias to :checkhealth vim.lsp" })
+vim.api.nvim_create_user_command("LspLog", function()
+    vim.cmd.tabnew(vim.lsp.log.get_filename())
+end, { desc = "Open LSP log" })
+keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", { desc = "LSP info" })
+keymap.set("n", "<leader>ll", "<cmd>LspLog<CR>", { desc = "LSP log" })
+keymap.set("n", "<leader>lr", "<cmd>lsp restart<CR>", { desc = "LSP restart (current buffer)" })
+
 -- Commet
 vim.api.nvim_set_keymap("n", "<C-_>", "gcc", { noremap = false })
 vim.api.nvim_set_keymap("v", "<C-_>", "gcc", { noremap = false })

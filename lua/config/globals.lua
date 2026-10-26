@@ -2,14 +2,14 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- debug mode
--- vim.lsp.set_log_level("debug")
+-- vim.lsp.log.set_level("debug")
 
--- yankink higlights
-vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highlight when yanking(copying) text",
+-- yank/put higlights
+vim.api.nvim_create_autocmd({ "TextYankPost", "TextPutPost" }, {
+    desc = "Highlight yanked(copied) and put(pasted) text",
     group = vim.api.nvim_create_augroup("higlight-yank", { clear = true }),
     callback = function()
-        vim.highlight.on_yank()
+        vim.hl.hl_op()
     end,
 })
 
